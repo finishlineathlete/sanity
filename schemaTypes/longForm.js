@@ -187,15 +187,6 @@ export default {
       })
     },
     
-    // Preview Instructions
-    {
-      name: 'previewInstructions',
-      title: '📋 Preview Instructions',
-      type: 'text',
-      readOnly: true,
-      description: 'How to preview your content',
-      initialValue: 'To preview this content:\n\n1. Look at the "Preview URL" field above\n2. If it\'s empty, manually construct the URL:\n   https://finishlineathlete.com/preview/longForm/[DOCUMENT_ID]?secret=preview-secret-2024\n3. Replace [DOCUMENT_ID] with: 47607f43-c555-46f7-bcaf-50b570a216fe\n4. Open the URL in your browser\n\nFor this article, the preview URL is:\nhttps://finishlineathlete.com/preview/longForm/47607f43-c555-46f7-bcaf-50b570a216fe?secret=preview-secret-2024'
-    }
 
   ]
 }

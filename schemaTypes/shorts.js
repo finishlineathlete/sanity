@@ -181,15 +181,6 @@ export default {
       })
     },
     
-    // Preview Instructions
-    {
-      name: 'previewInstructions',
-      title: '📋 Preview Instructions',
-      type: 'text',
-      readOnly: true,
-      description: 'How to preview your content',
-      initialValue: 'To preview this content:\n\n1. Look at the "Preview URL" field above\n2. If it\'s empty, manually construct the URL:\n   https://finishlineathlete.com/preview/shorts/[DOCUMENT_ID]?secret=preview-secret-2024\n3. Replace [DOCUMENT_ID] with the actual document ID\n4. Open the URL in your browser\n\nExample: https://finishlineathlete.com/preview/shorts/abc123?secret=preview-secret-2024'
-    }
 
   ]
 }
