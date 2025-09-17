@@ -26,9 +26,13 @@ export default defineConfig({
             title: 'Preview',
             name: 'preview',
             icon: () => '👁️',
-            onHandle: () => {
-              const documentId = context.document._id
-              const previewSecret = 'preview-secret-2024' // In production, use environment variable
+            onHandle: (params) => {
+              const documentId = params.draft?._id || params.published?._id
+              if (!documentId) {
+                alert('Document ID not found')
+                return
+              }
+              const previewSecret = 'preview-secret-2024'
               const previewUrl = `https://finishlineathlete.com/preview/${context.schemaType}/${documentId}?secret=${previewSecret}`
               window.open(previewUrl, '_blank')
             }
