@@ -17,23 +17,23 @@ export default defineConfig({
     types: schemaTypes,
   },
 
-        document: {
-          // Simple preview configuration for content list
-          preview: {
-            select: {
-              title: 'title',
-              subtitle: 'excerpt',
-              media: 'featuredImage'
-            }
-          },
-          
-          // Add preview action
-          actions: (prev, context) => {
-            // Only add preview action for content types
-            if (['shorts', 'longForm'].includes(context.schemaType)) {
-              return [...prev, PreviewAction];
-            }
-            return prev;
-          }
-        }
+  document: {
+    // Simple preview configuration for content list
+    preview: {
+      select: {
+        title: 'title',
+        subtitle: 'excerpt',
+        media: 'featuredImage'
+      }
+    },
+    
+    // Add preview action
+    actions: (prev, context) => {
+      // Only add preview action for content types
+      if (['shorts', 'longForm'].includes(context.schemaType)) {
+        return [...prev, PreviewAction];
+      }
+      return prev;
+    }
+  }
 })
