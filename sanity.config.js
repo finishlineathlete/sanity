@@ -15,4 +15,27 @@ export default defineConfig({
   schema: {
     types: schemaTypes,
   },
+
+  document: {
+    actions: (prev, context) => {
+      // Add preview action for content types
+      if (context.schemaType === 'shorts' || context.schemaType === 'longForm') {
+        return [
+          ...prev,
+          {
+            title: 'Preview',
+            name: 'preview',
+            icon: () => '👁️',
+            onHandle: () => {
+              const documentId = context.document._id
+              const previewSecret = 'preview-secret-2024' // In production, use environment variable
+              const previewUrl = `https://finishlineathlete.com/preview/${context.schemaType}/${documentId}?secret=${previewSecret}`
+              window.open(previewUrl, '_blank')
+            }
+          }
+        ]
+      }
+      return prev
+    }
+  }
 })
