@@ -181,59 +181,8 @@ export default {
       title: '👁️ Preview Content',
       type: 'string',
       readOnly: true,
-      description: 'Click the link below to preview this content before publishing',
-      components: {
-        input: (props) => {
-          const docId = props.document?._id
-          const previewUrl = docId 
-            ? `https://finishlineathlete.com/preview/longForm/${docId}?secret=preview-secret-2024`
-            : 'Preview URL will appear when document is loaded'
-          
-          return (
-            <div style={{ 
-              padding: '12px', 
-              border: '1px solid #e1e5e9', 
-              borderRadius: '6px', 
-              backgroundColor: '#f8f9fa',
-              fontFamily: 'system-ui, sans-serif'
-            }}>
-              <div style={{ 
-                marginBottom: '8px', 
-                fontWeight: '600', 
-                color: '#1a1a1a',
-                fontSize: '14px'
-              }}>
-                Preview URL:
-              </div>
-              <div style={{ 
-                marginBottom: '8px',
-                wordBreak: 'break-all',
-                fontSize: '13px'
-              }}>
-                <a 
-                  href={previewUrl} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  style={{ 
-                    color: '#0066cc', 
-                    textDecoration: 'underline',
-                    cursor: 'pointer'
-                  }}
-                >
-                  {previewUrl}
-                </a>
-              </div>
-              <div style={{ 
-                fontSize: '12px', 
-                color: '#6b7280',
-                fontStyle: 'italic'
-              }}>
-                Click the link above to preview this content
-              </div>
-            </div>
-          )
-        }
-      }
+      description: 'Preview URL for this content (copy and paste into browser)',
+      placeholder: 'Preview URL will be generated automatically'
     }
   ]
 }
