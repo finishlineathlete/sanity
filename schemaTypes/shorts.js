@@ -172,16 +172,19 @@ export default {
     // Preview Field
     {
       name: 'previewUrl',
-      title: 'Preview URL',
+      title: '👁️ Preview Content',
       type: 'url',
       readOnly: true,
-      description: 'Click to preview this content before publishing',
+      description: 'Click the link below to preview this content before publishing',
       initialValue: (doc) => {
         if (doc._id) {
           return `https://finishlineathlete.com/preview/shorts/${doc._id}?secret=preview-secret-2024`
         }
         return ''
-      }
+      },
+      validation: Rule => Rule.uri({
+        scheme: ['http', 'https']
+      })
     }
   ]
 }
