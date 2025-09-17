@@ -17,20 +17,12 @@ export default defineConfig({
   },
 
   document: {
-    // Add preview configuration for content types
+    // Simple preview configuration for content list
     preview: {
       select: {
         title: 'title',
         subtitle: 'excerpt',
         media: 'featuredImage'
-      },
-      prepare(selection) {
-        const {title, subtitle, media} = selection
-        return {
-          title: title || 'Untitled',
-          subtitle: subtitle || 'No excerpt',
-          media: media
-        }
       }
     }
   }

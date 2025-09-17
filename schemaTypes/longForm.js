@@ -175,23 +175,14 @@ export default {
       validation: Rule => Rule.required().error('Last Updated Date is required')
     },
 
-    // Debug Test Field
+    // Preview Instructions
     {
-      name: 'debugTest',
-      title: '🔍 Debug Test',
+      name: 'previewInstructions',
+      title: '👁️ How to Preview',
       type: 'text',
       readOnly: true,
-      description: 'This field helps us debug what\'s happening',
-      initialValue: 'DEBUG: This should appear for new documents'
-    },
-    
-    // Simple Preview Field
-    {
-      name: 'preview',
-      title: '👁️ Content Preview',
-      type: 'text',
-      readOnly: true,
-      description: 'Preview your content by looking at the fields above'
+      description: 'Instructions for previewing your content',
+      initialValue: 'To preview this content:\n\n1. Copy the Document ID from the URL above\n2. Go to: https://finishlineathlete.com/preview/longForm/[DOCUMENT_ID]?secret=preview-secret-2024\n3. Replace [DOCUMENT_ID] with the actual ID\n4. Open the URL in your browser\n\nExample: https://finishlineathlete.com/preview/longForm/abc123?secret=preview-secret-2024'
     }
 
   ]
