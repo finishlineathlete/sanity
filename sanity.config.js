@@ -32,6 +32,42 @@ export default defineConfig({
           media: media
         }
       }
+    },
+    
+    // Add preview action button
+    actions: (prev, context) => {
+      if (context.schemaType === 'shorts' || context.schemaType === 'longForm') {
+        return [
+          ...prev,
+          {
+            title: 'Preview',
+            name: 'preview',
+            icon: () => '👁️',
+            onHandle: () => {
+              // Create a preview modal or panel
+              const docId = context.document._id
+              const docTitle = context.document.title || 'Untitled'
+              const docExcerpt = context.document.excerpt || 'No excerpt'
+              const docImage = context.document.featuredImage?.asset?.url || ''
+              
+              // Show preview in a simple alert for now
+              const previewContent = `
+                PREVIEW: ${docTitle}
+                
+                ${docExcerpt}
+                
+                ${docImage ? `Image: ${docImage}` : 'No image'}
+                
+                Document ID: ${docId}
+                Type: ${context.schemaType}
+              `
+              
+              alert(previewContent)
+            }
+          }
+        ]
+      }
+      return prev
     }
   }
 })
