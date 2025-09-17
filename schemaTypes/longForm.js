@@ -175,5 +175,33 @@ export default {
       validation: Rule => Rule.required().error('Last Updated Date is required')
     },
 
+    // Preview Field
+    {
+      name: 'preview',
+      title: '👁️ Content Preview',
+      type: 'text',
+      readOnly: true,
+      description: 'This shows how your content will appear',
+      initialValue: (doc, context) => {
+        const title = doc?.title || 'Untitled'
+        const excerpt = doc?.excerpt || 'No excerpt provided'
+        const author = doc?.author?.name || 'Unknown Author'
+        const publishDate = doc?.publishDate ? new Date(doc.publishDate).toLocaleDateString() : 'Not set'
+        const readingTime = doc?.readingTime || 0
+        const wordCount = doc?.wordCount || 0
+        
+        return `📰 ${title}
+        
+📝 ${excerpt}
+
+👤 By ${author}
+📅 ${publishDate}
+⏱️ ${readingTime} min read
+📊 ${wordCount} words
+
+This is how your content will appear to readers.`
+      }
+    }
+
   ]
 }
