@@ -175,16 +175,18 @@ export default {
       validation: Rule => Rule.required().error('Last Updated Date is required')
     },
 
-    // Preview URL
+    // Preview URL - computed field
     {
       name: 'previewUrl',
       title: '👁️ Preview URL',
-      type: 'url',
+      type: 'string',
       readOnly: true,
-      description: 'Copy this URL to preview your content on the website',
-      validation: Rule => Rule.uri({
-        scheme: ['http', 'https']
-      })
+      description: 'Click to copy and open in new tab',
+      fieldset: 'seoPhase1',
+      initialValue: (_, {document}) => {
+        if (!document?._id) return 'Save document to generate preview URL'
+        return `https://finishlineathlete.com/preview/longForm/${document._id}?secret=preview-secret-2024`
+      }
     },
     
 
