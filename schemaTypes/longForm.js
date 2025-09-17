@@ -175,14 +175,23 @@ export default {
       validation: Rule => Rule.required().error('Last Updated Date is required')
     },
 
-    // Preview Field
+    // Debug Test Field
+    {
+      name: 'debugTest',
+      title: '🔍 Debug Test',
+      type: 'text',
+      readOnly: true,
+      description: 'This field helps us debug what\'s happening',
+      initialValue: 'DEBUG: This should appear for new documents'
+    },
+    
+    // Simple Preview Field
     {
       name: 'preview',
       title: '👁️ Content Preview',
       type: 'text',
       readOnly: true,
-      description: 'Preview your content by looking at the fields above',
-      initialValue: 'To preview your content:\n\n1. Check the Title field above\n2. Check the Excerpt field above\n3. Check the Featured Image field above\n4. All fields together show how your content will appear\n\nThis gives you a complete preview of your article!'
+      description: 'Preview your content by looking at the fields above'
     }
 
   ]
