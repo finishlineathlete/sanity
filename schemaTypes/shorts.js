@@ -177,9 +177,41 @@ export default {
       readOnly: true,
       description: 'Click to copy and open in new tab',
       fieldset: 'seoPhase1',
-      initialValue: (_, {document}) => {
-        if (!document?._id) return 'Save document to generate preview URL'
-        return `https://finishlineathlete.com/preview/shorts/${document._id}?secret=preview-secret-2024`
+      components: {
+        input: (props) => {
+          const {value, onChange} = props
+          const documentId = props.document?._id || 'DOCUMENT_ID'
+          const previewUrl = `https://finishlineathlete.com/preview/shorts/${documentId}?secret=preview-secret-2024`
+          
+          // Update the value if it's different
+          if (value !== previewUrl) {
+            onChange(previewUrl)
+          }
+          
+          return (
+            <div style={{padding: '8px', backgroundColor: '#f5f5f5', borderRadius: '4px', fontFamily: 'monospace', fontSize: '12px'}}>
+              <div style={{marginBottom: '8px', fontWeight: 'bold'}}>Preview URL:</div>
+              <div style={{wordBreak: 'break-all', marginBottom: '8px'}}>{previewUrl}</div>
+              <button 
+                onClick={() => {
+                  navigator.clipboard.writeText(previewUrl)
+                  alert('Preview URL copied to clipboard!')
+                }}
+                style={{
+                  padding: '4px 8px',
+                  backgroundColor: '#0070f3',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '4px',
+                  cursor: 'pointer',
+                  fontSize: '12px'
+                }}
+              >
+                Copy URL
+              </button>
+            </div>
+          )
+        }
       }
     },
     
