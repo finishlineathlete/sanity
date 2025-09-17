@@ -2,6 +2,7 @@ import {defineConfig} from 'sanity'
 import {structureTool} from 'sanity/structure'
 import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './schemaTypes'
+import {PreviewAction} from './actions/PreviewAction'
 
 export default defineConfig({
   name: 'default',
@@ -24,6 +25,11 @@ export default defineConfig({
               subtitle: 'excerpt',
               media: 'featuredImage'
             }
+          },
+          
+          // Add preview action
+          actions: (prev, context) => {
+            return [...prev, PreviewAction];
           }
         }
 })
