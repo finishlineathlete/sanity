@@ -1,7 +1,12 @@
 import React from 'react';
 
 export const PreviewAction = (props) => {
-  const { published, draft } = props;
+  const { published, draft, type } = props;
+  
+  // Only show for content types
+  if (!['shorts', 'longForm'].includes(type)) {
+    return null;
+  }
   
   // Use published document if available, otherwise use draft
   const document = published || draft;
@@ -10,14 +15,8 @@ export const PreviewAction = (props) => {
     return null; // Don't show action if no document
   }
   
-  const { _type, _id } = document;
-  
-  // Only show for content types
-  if (!['shorts', 'longForm'].includes(_type)) {
-    return null;
-  }
-  
-  const previewUrl = `https://finishlineathlete.com/preview/${_type}/${_id}?secret=preview-secret-2024`;
+  const { _id } = document;
+  const previewUrl = `https://finishlineathlete.com/preview/${type}/${_id}?secret=preview-secret-2024`;
   
   return {
     label: '👁️ Preview',
