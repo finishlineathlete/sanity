@@ -175,14 +175,5 @@ export default {
       validation: Rule => Rule.required().error('Last Updated Date is required')
     },
 
-    // Preview Field
-    {
-      name: 'previewUrl',
-      title: '👁️ Preview Content',
-      type: 'string',
-      readOnly: true,
-      description: 'Preview URL for this content (copy and paste into browser)',
-      placeholder: 'Preview URL will be generated automatically'
-    }
   ]
 }

@@ -16,31 +16,22 @@ export default defineConfig({
     types: schemaTypes,
   },
 
-  // Document actions temporarily disabled due to Sanity 4.9.0 compatibility issues
-  // document: {
-  //   actions: (prev, context) => {
-  //     // Add preview action for content types
-  //     if (context.schemaType === 'shorts' || context.schemaType === 'longForm') {
-  //       return [
-  //         ...prev,
-  //         {
-  //           title: 'Preview',
-  //           name: 'preview',
-  //           icon: () => '👁️',
-  //           onHandle: (params) => {
-  //             const documentId = params.draft?._id || params.published?._id
-  //             if (!documentId) {
-  //               alert('Document ID not found')
-  //               return
-  //             }
-  //             const previewSecret = 'preview-secret-2024'
-  //             const previewUrl = `https://finishlineathlete.com/preview/${context.schemaType}/${documentId}?secret=${previewSecret}`
-  //             window.open(previewUrl, '_blank')
-  //           }
-  //         }
-  //       ]
-  //     }
-  //     return prev
-  //   }
-  // }
+  document: {
+    // Add preview configuration for content types
+    preview: {
+      select: {
+        title: 'title',
+        subtitle: 'excerpt',
+        media: 'featuredImage'
+      },
+      prepare(selection) {
+        const {title, subtitle, media} = selection
+        return {
+          title: title || 'Untitled',
+          subtitle: subtitle || 'No excerpt',
+          media: media
+        }
+      }
+    }
+  }
 })
