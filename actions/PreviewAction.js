@@ -1,4 +1,6 @@
-// Simple action object approach (no React hooks needed)
+// React component approach (as Sanity expects)
+import React from 'react';
+
 export function PreviewAction(props) {
   console.log('PreviewAction props:', props);
   
