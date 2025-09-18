@@ -167,6 +167,9 @@ export default {
       type: 'datetime',
       fieldset: 'seoPhase1',
       validation: Rule => Rule.required().error('Last Updated Date is required')
-    }
+    },
+
+    
+
   ]
 }
