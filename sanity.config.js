@@ -1,5 +1,5 @@
 import {defineConfig} from 'sanity'
-import {structureTool} from 'sanity/structure'
+import {deskTool} from 'sanity/desk'
 import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './schemaTypes'
 import {PreviewAction} from './actions/PreviewAction'
@@ -12,22 +12,14 @@ export default defineConfig({
   dataset: 'production',
 
   plugins: [
-    structureTool({
-      structure: (S) =>
-        S.list()
-          .title('Content')
-          .items([
-            S.listItem()
-              .title('Shorts')
-              .schemaType('shorts')
-              .child(S.documentTypeList('shorts').title('Shorts')),
-            S.listItem()
-              .title('Long Form Articles')
-              .schemaType('longForm')
-              .child(S.documentTypeList('longForm').title('Long Form Articles')),
-            S.divider(),
-            ...S.documentTypeListItems().filter(listItem => !['shorts', 'longForm'].includes(listItem.getId()))
-          ])
+    deskTool({
+      resolveDocumentActions: (prev, context) => {
+        console.log('resolveDocumentActions called for:', context.schemaType);
+        if (['shorts', 'longForm'].includes(context.schemaType)) {
+          return [...prev, PreviewAction];
+        }
+        return prev;
+      }
     }), 
     visionTool()
   ],
@@ -44,15 +36,6 @@ export default defineConfig({
         subtitle: 'excerpt',
         media: 'featuredImage'
       }
-    },
-    
-    // Add preview action
-    actions: (prev, context) => {
-      console.log('Document actions called for:', context.schemaType);
-      if (['shorts', 'longForm'].includes(context.schemaType)) {
-        return [...prev, PreviewAction];
-      }
-      return prev;
     }
   }
 })
