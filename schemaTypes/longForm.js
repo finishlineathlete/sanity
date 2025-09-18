@@ -179,7 +179,7 @@ export default {
     {
       name: 'previewLink',
       title: '👁️ Preview Link',
-      type: 'url',
+      type: 'string',
       initialValue: (doc) => {
         if (doc._id) {
           return `https://finishlineathlete.com/preview/longForm/${doc._id}?secret=preview-secret-2024`;
