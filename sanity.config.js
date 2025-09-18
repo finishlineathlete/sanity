@@ -30,11 +30,14 @@ export default defineConfig({
     // Add preview action
     actions: (prev, context) => {
       console.log('Document actions context:', context); // Debug log
+      console.log('Available actions:', prev.map(a => a.label || a.title)); // Debug existing actions
       
       // Only add preview action for content types
       if (['shorts', 'longForm'].includes(context.schemaType)) {
         console.log('Adding preview action for:', context.schemaType);
-        return [...prev, PreviewAction];
+        const newActions = [...prev, PreviewAction];
+        console.log('New actions list:', newActions.map(a => a.label || a.title));
+        return newActions;
       }
       
       console.log('Not adding preview action for:', context.schemaType);

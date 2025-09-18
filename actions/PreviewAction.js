@@ -24,6 +24,7 @@ export const PreviewAction = (props) => {
   
   return {
     label: '👁️ Preview',
+    shortcut: 'Ctrl+Shift+P',
     onHandle: () => {
       console.log('Opening preview URL:', previewUrl);
       window.open(previewUrl, '_blank');
