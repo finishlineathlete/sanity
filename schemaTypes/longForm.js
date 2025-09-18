@@ -175,17 +175,13 @@ export default {
       validation: Rule => Rule.required().error('Last Updated Date is required')
     },
 
-    // Preview Field
+    // Preview Instructions
     {
-      name: 'previewLink',
-      title: '👁️ Preview Link',
-      type: 'string',
-      initialValue: (doc) => {
-        if (doc._id) {
-          return `https://finishlineathlete.com/preview/longForm/${doc._id}?secret=preview-secret-2024`;
-        }
-        return 'Save document to generate preview link';
-      }
+      name: 'previewInstructions',
+      title: '👁️ Preview Instructions',
+      type: 'text',
+      readOnly: true,
+      initialValue: 'To preview this content:\n\n1. Copy this URL: https://finishlineathlete.com/preview/longForm/{DOCUMENT_ID}?secret=preview-secret-2024\n\n2. Replace {DOCUMENT_ID} with your document ID\n\n3. Paste in browser to preview'
     }
 
   ]
