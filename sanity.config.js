@@ -44,6 +44,41 @@ export default defineConfig({
         subtitle: 'excerpt',
         media: 'featuredImage'
       }
+    },
+    
+    // Add preview action
+    actions: (prev, context) => {
+      console.log('=== DOCUMENT ACTIONS CALLED ===');
+      console.log('Context:', context);
+      console.log('Schema type:', context.schemaType);
+      console.log('Previous actions count:', prev.length);
+      
+      // Create preview action
+      const previewAction = {
+        label: '👁️ Preview',
+        onHandle: () => {
+          console.log('Preview action clicked!');
+          const { published, draft } = context;
+          const document = published || draft;
+          if (document) {
+            const previewUrl = `https://finishlineathlete.com/preview/${context.schemaType}/${document._id}?secret=preview-secret-2024`;
+            console.log('Opening preview URL:', previewUrl);
+            window.open(previewUrl, '_blank');
+          } else {
+            console.log('No document found for preview');
+            alert('No document found for preview');
+          }
+        }
+      };
+      
+      // Only add preview action for content types
+      if (['shorts', 'longForm'].includes(context.schemaType)) {
+        console.log('Adding preview action for:', context.schemaType);
+        return [...prev, previewAction];
+      }
+      
+      console.log('Not adding preview action for:', context.schemaType);
+      return prev;
     }
   }
 })

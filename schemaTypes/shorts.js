@@ -2,21 +2,6 @@ export default {
   name: 'shorts',
   title: 'Shorts',
   type: 'document',
-  actions: [
-    {
-      name: 'preview',
-      title: '👁️ Preview',
-      onHandle: (params) => {
-        const { published, draft } = params;
-        const document = published || draft;
-        if (document) {
-          const previewUrl = `https://finishlineathlete.com/preview/shorts/${document._id}?secret=preview-secret-2024`;
-          console.log('Opening preview URL:', previewUrl);
-          window.open(previewUrl, '_blank');
-        }
-      }
-    }
-  ],
   fieldsets: [
     {
       name: 'seoPhase1',

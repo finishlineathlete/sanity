@@ -2,33 +2,6 @@ export default {
   name: 'longForm',
   title: 'Long Form Articles',
   type: 'document',
-  actions: [
-    {
-      name: 'test',
-      title: '🧪 Test Button',
-      onHandle: () => {
-        console.log('Test button clicked!');
-        alert('Test button works!');
-      }
-    },
-    {
-      name: 'preview',
-      title: '👁️ Preview',
-      onHandle: (params) => {
-        console.log('Preview action params:', params);
-        const { published, draft } = params;
-        const document = published || draft;
-        if (document) {
-          const previewUrl = `https://finishlineathlete.com/preview/longForm/${document._id}?secret=preview-secret-2024`;
-          console.log('Opening preview URL:', previewUrl);
-          window.open(previewUrl, '_blank');
-        } else {
-          console.log('No document found for preview');
-          alert('No document found for preview');
-        }
-      }
-    }
-  ],
   fieldsets: [
     {
       name: 'seoPhase1',
