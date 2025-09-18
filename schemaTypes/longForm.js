@@ -173,6 +173,20 @@ export default {
       type: 'datetime',
       fieldset: 'seoPhase1',
       validation: Rule => Rule.required().error('Last Updated Date is required')
+    },
+
+    // Preview Field
+    {
+      name: 'previewLink',
+      title: '👁️ Preview Link',
+      type: 'url',
+      readOnly: true,
+      initialValue: (doc) => {
+        if (doc._id) {
+          return `https://finishlineathlete.com/preview/longForm/${doc._id}?secret=preview-secret-2024`;
+        }
+        return 'Save document to generate preview link';
+      }
     }
 
   ]
