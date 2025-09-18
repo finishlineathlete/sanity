@@ -29,7 +29,7 @@ export default defineConfig({
     
     // Add preview action
     actions: (prev, context) => {
-      // Only add preview action for content types
+      console.log('Document actions called for:', context.schemaType);
       if (['shorts', 'longForm'].includes(context.schemaType)) {
         return [...prev, PreviewAction];
       }
