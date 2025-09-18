@@ -2,7 +2,7 @@ import {defineConfig} from 'sanity'
 import {structureTool} from 'sanity/structure'
 import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './schemaTypes'
-import resolveProductionUrl from './resolveProductionUrl'
+import {PreviewAction} from './actions/PreviewAction'
 
 export default defineConfig({
   name: 'default',
@@ -46,7 +46,13 @@ export default defineConfig({
       }
     },
     
-    // Enable preview functionality
-    productionUrl: resolveProductionUrl
+    // Add preview action
+    actions: (prev, context) => {
+      console.log('Document actions called for:', context.schemaType);
+      if (['shorts', 'longForm'].includes(context.schemaType)) {
+        return [...prev, PreviewAction];
+      }
+      return prev;
+    }
   }
 })
