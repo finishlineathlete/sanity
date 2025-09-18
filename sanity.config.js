@@ -1,5 +1,5 @@
 import {defineConfig} from 'sanity'
-import {deskTool} from 'sanity/desk'
+import {structureTool} from 'sanity/structure'
 import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './schemaTypes'
 import {PreviewAction} from './actions/PreviewAction'
@@ -11,18 +11,7 @@ export default defineConfig({
   projectId: 'ouvbyhmf',
   dataset: 'production',
 
-  plugins: [
-    deskTool({
-      resolveDocumentActions: (prev, context) => {
-        console.log('resolveDocumentActions called for:', context.schemaType);
-        if (['shorts', 'longForm'].includes(context.schemaType)) {
-          return [...prev, PreviewAction];
-        }
-        return prev;
-      }
-    }), 
-    visionTool()
-  ],
+  plugins: [structureTool(), visionTool()],
 
   schema: {
     types: schemaTypes,
@@ -36,6 +25,15 @@ export default defineConfig({
         subtitle: 'excerpt',
         media: 'featuredImage'
       }
+    },
+    
+    // Add preview action
+    actions: (prev, context) => {
+      console.log('Document actions called for:', context.schemaType);
+      if (['shorts', 'longForm'].includes(context.schemaType)) {
+        return [...prev, PreviewAction];
+      }
+      return prev;
     }
   }
 })
