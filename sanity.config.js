@@ -11,7 +11,26 @@ export default defineConfig({
   projectId: 'ouvbyhmf',
   dataset: 'production',
 
-  plugins: [structureTool(), visionTool()],
+  plugins: [
+    structureTool({
+      structure: (S) =>
+        S.list()
+          .title('Content')
+          .items([
+            S.listItem()
+              .title('Shorts')
+              .schemaType('shorts')
+              .child(S.documentTypeList('shorts').title('Shorts')),
+            S.listItem()
+              .title('Long Form Articles')
+              .schemaType('longForm')
+              .child(S.documentTypeList('longForm').title('Long Form Articles')),
+            S.divider(),
+            ...S.documentTypeListItems().filter(listItem => !['shorts', 'longForm'].includes(listItem.getId()))
+          ])
+    }), 
+    visionTool()
+  ],
 
   schema: {
     types: schemaTypes,
@@ -25,32 +44,6 @@ export default defineConfig({
         subtitle: 'excerpt',
         media: 'featuredImage'
       }
-    },
-    
-    // Add preview action
-    actions: (prev, context) => {
-      console.log('=== DOCUMENT ACTIONS CALLED ===');
-      console.log('Context:', context);
-      console.log('Schema type:', context.schemaType);
-      console.log('Previous actions:', prev.length);
-      
-      // Always add a test action first
-      const testAction = {
-        label: '🧪 Test Action',
-        onHandle: () => {
-          console.log('Test action clicked!');
-          alert('Test action works!');
-        }
-      };
-      
-      // Only add preview action for content types
-      if (['shorts', 'longForm'].includes(context.schemaType)) {
-        console.log('Adding preview action for:', context.schemaType);
-        return [...prev, testAction, PreviewAction];
-      }
-      
-      console.log('Not adding preview action for:', context.schemaType);
-      return [...prev, testAction];
     }
   }
 })
