@@ -180,7 +180,6 @@ export default {
       name: 'previewInstructions',
       title: '👁️ Preview Instructions',
       type: 'text',
-      readOnly: true,
       initialValue: 'To preview this content:\n\n1. Copy this URL: https://finishlineathlete.com/preview/longForm/{DOCUMENT_ID}?secret=preview-secret-2024\n\n2. Replace {DOCUMENT_ID} with your document ID\n\n3. Paste in browser to preview'
     }
 
