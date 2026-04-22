@@ -9,12 +9,14 @@
     "start": "sanity start",
     "build": "sanity build",
     "deploy": "sanity deploy",
-    "deploy-graphql": "sanity graphql deploy"
+    "deploy-graphql": "sanity graphql deploy",
+    "backfill:content-defaults": "node scripts/backfillContentDefaults.mjs"
   },
   "keywords": [
     "sanity"
   ],
   "dependencies": {
+    "@sanity/client": "^7.11.1",
     "@sanity/cli": "^4.9.0",
     "@sanity/vision": "^4.9.0",
     "react": "^19.1",

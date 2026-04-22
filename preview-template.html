@@ -65,13 +65,6 @@
             line-height: 1.6;
         }
         
-        .card-summary {
-            font-size: 1.1rem;
-            margin-bottom: 30px;
-            opacity: 0.8;
-            font-style: italic;
-        }
-        
         .meta {
             display: flex;
             justify-content: center;
@@ -113,44 +106,6 @@
             border-radius: 20px;
             font-size: 0.9rem;
             text-decoration: none;
-        }
-        
-        /* SEO Preview Section */
-        .seo-preview {
-            background: #f8f9fa;
-            border-top: 1px solid #e9ecef;
-            padding: 30px 40px;
-        }
-        
-        .seo-preview h3 {
-            color: #333;
-            margin-bottom: 20px;
-            font-size: 1.3rem;
-        }
-        
-        .seo-meta {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-        
-        .seo-field {
-            background: white;
-            padding: 15px;
-            border-radius: 6px;
-            border-left: 4px solid #007bff;
-        }
-        
-        .seo-field strong {
-            display: block;
-            color: #007bff;
-            margin-bottom: 5px;
-            font-size: 0.9rem;
-        }
-        
-        .seo-field span {
-            color: #333;
-            font-size: 0.95rem;
         }
         
         /* Responsive Design */
@@ -253,13 +208,14 @@
                         <div class="meta">
                             <span>👤 By ${content.author?.name || 'Unknown Author'}</span>
                             <span>📅 ${formatDate(content.publishDate)}</span>
+                            <span>🏷️ ${content.category || 'Uncategorized'}</span>
                             <span>⏱️ ${content.readingTime || 0} min read</span>
                             <span>📊 ${content.wordCount || 0} words</span>
                         </div>
                     </header>
                     
                     <div class="content-body">
-                        <p>${content.body || ''}</p>
+                        <p>${toPlainText(content.body)}</p>
                     </div>
                     
                     ${content.tags && content.tags.length > 0 ? `
@@ -267,36 +223,6 @@
                             ${content.tags.map(tag => `<span class="tag">#${tag.title || tag}</span>`).join('')}
                         </div>
                     ` : ''}
-                    
-                    <div class="seo-preview">
-                        <h3>SEO Preview</h3>
-                        <div class="seo-meta">
-                            <div class="seo-field">
-                                <strong>Title Tag</strong>
-                                <span>${content.titleTag || content.title || 'Not set'}</span>
-                            </div>
-                            <div class="seo-field">
-                                <strong>Meta Description</strong>
-                                <span>${content.metaDescription || 'Not set'}</span>
-                            </div>
-                            <div class="seo-field">
-                                <strong>Focus Keyword</strong>
-                                <span>${content.focusKeyword || 'Not set'}</span>
-                            </div>
-                            <div class="seo-field">
-                                <strong>Primary Keyword</strong>
-                                <span>${content.primaryKeyword || 'Not set'}</span>
-                            </div>
-                            <div class="seo-field">
-                                <strong>Content Type</strong>
-                                <span>${content.contentType || 'Not set'}</span>
-                            </div>
-                            <div class="seo-field">
-                                <strong>Primary Topic/Category</strong>
-                                <span>${content.primaryTopicCategory || 'Not set'}</span>
-                            </div>
-                        </div>
-                    </div>
                 </article>
             `;
         }
@@ -308,17 +234,17 @@
                         ${content.featuredImage ? `<img src="${content.featuredImage.asset.url}" alt="${content.title}" class="hero-image">` : ''}
                         <h1>${content.title || 'Untitled'}</h1>
                         <p class="excerpt">${content.excerpt || ''}</p>
-                        ${content.cardSummary ? `<p class="card-summary">${content.cardSummary}</p>` : ''}
                         <div class="meta">
                             <span>👤 By ${content.author?.name || 'Unknown Author'}</span>
                             <span>📅 ${formatDate(content.publishDate)}</span>
+                            <span>🏷️ ${content.category || 'Uncategorized'}</span>
                             <span>⏱️ ${content.readingTime || 0} min read</span>
                             <span>📊 ${content.wordCount || 0} words</span>
                         </div>
                     </header>
                     
                     <div class="content-body">
-                        <p>${content.body || ''}</p>
+                        <p>${toPlainText(content.body)}</p>
                     </div>
                     
                     ${content.tags && content.tags.length > 0 ? `
@@ -326,38 +252,16 @@
                             ${content.tags.map(tag => `<span class="tag">#${tag.title || tag}</span>`).join('')}
                         </div>
                     ` : ''}
-                    
-                    <div class="seo-preview">
-                        <h3>SEO Preview</h3>
-                        <div class="seo-meta">
-                            <div class="seo-field">
-                                <strong>Title Tag</strong>
-                                <span>${content.titleTag || content.title || 'Not set'}</span>
-                            </div>
-                            <div class="seo-field">
-                                <strong>Meta Description</strong>
-                                <span>${content.metaDescription || 'Not set'}</span>
-                            </div>
-                            <div class="seo-field">
-                                <strong>Focus Keyword</strong>
-                                <span>${content.focusKeyword || 'Not set'}</span>
-                            </div>
-                            <div class="seo-field">
-                                <strong>Primary Keyword</strong>
-                                <span>${content.primaryKeyword || 'Not set'}</span>
-                            </div>
-                            <div class="seo-field">
-                                <strong>Content Type</strong>
-                                <span>${content.contentType || 'Not set'}</span>
-                            </div>
-                            <div class="seo-field">
-                                <strong>Primary Topic/Category</strong>
-                                <span>${content.primaryTopicCategory || 'Not set'}</span>
-                            </div>
-                        </div>
-                    </div>
                 </article>
             `;
+        }
+        
+        function toPlainText(body) {
+            if (!Array.isArray(body)) return body || '';
+            return body
+                .filter(block => block && Array.isArray(block.children))
+                .map(block => block.children.map(child => child.text || '').join(''))
+                .join('\n\n');
         }
         
         function formatDate(dateString) {

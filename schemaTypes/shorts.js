@@ -26,46 +26,51 @@ export default {
     {
       name: 'excerpt',
       title: 'Excerpt',
-      type: 'text',
-      validation: Rule => Rule.required().error('Excerpt is required')
+      type: 'text'
     },
     {
       name: 'featuredImage',
       title: 'Featured Image',
-      type: 'image',
-      validation: Rule => Rule.required().error('Featured Image is required')
+      type: 'image'
     },
     {
       name: 'author',
       title: 'Author',
       type: 'reference',
-      to: [{ type: 'author' }],
-      validation: Rule => Rule.required().error('Author is required')
+      to: [{ type: 'author' }]
     },
     {
       name: 'publishDate',
       title: 'Publish Date',
       type: 'datetime',
+      initialValue: () => new Date().toISOString(),
       validation: Rule => Rule.required().error('Publish Date is required')
+    },
+    {
+      name: 'category',
+      title: 'Category',
+      type: 'string',
+      validation: Rule => Rule.required().error('Category is required')
     },
     {
       name: 'tags',
       title: 'Tags',
       type: 'array',
-      of: [{ type: 'reference', to: [{ type: 'tag' }] }],
-      validation: Rule => Rule.required().error('At least one tag is required')
+      of: [{ type: 'reference', to: [{ type: 'tag' }] }]
     },
     {
       name: 'wordCount',
       title: 'Word Count',
       type: 'number',
-      validation: Rule => Rule.required().error('Word Count is required')
+      readOnly: true,
+      hidden: true
     },
     {
       name: 'readingTime',
       title: 'Reading Time (mins)',
       type: 'number',
-      validation: Rule => Rule.required().error('Reading Time is required')
+      readOnly: true,
+      hidden: true
     },
     {
       name: 'body',
@@ -118,42 +123,42 @@ export default {
       title: 'Content Type',
       type: 'string',
       fieldset: 'seoPhase1',
-      validation: Rule => Rule.required().error('Content Type is required')
+      hidden: true
     },
     {
       name: 'titleTag',
       title: 'Title Tag',
       type: 'string',
       fieldset: 'seoPhase1',
-      validation: Rule => Rule.required().error('Title Tag is required')
+      hidden: true
     },
     {
       name: 'metaDescription',
       title: 'Meta Description',
       type: 'text',
       fieldset: 'seoPhase1',
-      validation: Rule => Rule.required().error('Meta Description is required')
+      hidden: true
     },
     {
       name: 'urlSlug',
       title: 'URL Slug',
       type: 'string',
       fieldset: 'seoPhase1',
-      validation: Rule => Rule.required().error('URL Slug is required')
+      hidden: true
     },
     {
       name: 'focusKeyword',
       title: 'Focus Keyword',
       type: 'string',
       fieldset: 'seoPhase1',
-      validation: Rule => Rule.required().error('Focus Keyword is required')
+      hidden: true
     },
     {
       name: 'primaryKeyword',
       title: 'Primary Keyword',
       type: 'string',
       fieldset: 'seoPhase1',
-      validation: Rule => Rule.required().error('Primary Keyword is required')
+      hidden: true
     },
     {
       name: 'secondaryKeywords',
@@ -161,21 +166,21 @@ export default {
       type: 'array',
       of: [{ type: 'string' }],
       fieldset: 'seoPhase1',
-      validation: Rule => Rule.required().error('At least one secondary keyword is required')
+      hidden: true
     },
     {
       name: 'h1Tag',
       title: 'H1 Tag',
       type: 'string',
       fieldset: 'seoPhase1',
-      validation: Rule => Rule.required().error('H1 Tag is required')
+      hidden: true
     },
     {
       name: 'primaryTopicCategory',
       title: 'Primary Topic/Category',
       type: 'string',
       fieldset: 'seoPhase1',
-      validation: Rule => Rule.required().error('Primary Topic/Category is required')
+      hidden: true
     },
     {
       name: 'contentTags',
@@ -183,28 +188,29 @@ export default {
       type: 'array',
       of: [{ type: 'string' }],
       fieldset: 'seoPhase1',
-      validation: Rule => Rule.required().error('At least one content tag is required')
+      hidden: true
     },
     {
       name: 'contentLength',
       title: 'Content Length',
       type: 'number',
       fieldset: 'seoPhase1',
-      validation: Rule => Rule.required().error('Content Length is required')
+      hidden: true
     },
     {
       name: 'authorBioDetails',
       title: 'Author Bio/Details',
       type: 'text',
       fieldset: 'seoPhase1',
-      validation: Rule => Rule.required().error('Author Bio/Details are required')
+      hidden: true
     },
     {
       name: 'lastUpdatedDate',
       title: 'Last Updated Date',
       type: 'datetime',
       fieldset: 'seoPhase1',
-      validation: Rule => Rule.required().error('Last Updated Date is required')
+      readOnly: true,
+      hidden: true
     },
 
     
